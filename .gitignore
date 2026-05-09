@@ -1,0 +1,9 @@
+.angular/cache
+node_modules
+.venv
+__pycache__
+*.pyc
+*.sqlite3
+frontend/dist
+frontend/coverage
+.coverage

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.55;
+}
+
+[dir='rtl'] body,
+:lang(he) {
+  font-family: 'Heebo', system-ui, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: 0.5rem;
+  transform: translateY(-200%);
+  background: #2E2A26;
+  color: #FBF7F1;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  z-index: 1000;
+  transition: transform 0.15s ease;
+
+  &:focus {
+    transform: translateY(0);
+    outline: 3px solid #C58B5F;
+    outline-offset: 2px;
+  }
+}
+
+*:focus-visible {
+  outline: 3px solid #6F8063;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+// Utility — Tailwind doesn't ship logical utilities by default
+.ms-auto { margin-inline-start: auto; }
+.me-auto { margin-inline-end: auto; }
+
+// Fade-in for route transitions (kept subtle — respects reduced-motion)
+@media (prefers-reduced-motion: no-preference) {
+  rns-root > * {
+    animation: fadeIn 280ms ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

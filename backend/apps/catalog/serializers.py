@@ -18,7 +18,17 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """Public-facing serializer.
+
+    `image_url` is computed: if an image was uploaded via the admin UI it
+    returns the absolute URL of that file; otherwise it falls back to the
+    legacy `image_url` string (used by seed data and external URLs). This
+    keeps the response shape stable for the frontend while letting the
+    admin form switch to file uploads.
+    """
+
     category_slug = serializers.CharField(source="category.slug", read_only=True)
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -41,9 +51,24 @@ class ProductSerializer(serializers.ModelSerializer):
             "is_active",
         )
 
+    def get_image_url(self, obj: Product) -> str:
+        if obj.image:
+            request = self.context.get("request")
+            url = obj.image.url
+            return request.build_absolute_uri(url) if request else url
+        return obj.image_url or ""
+
 
 class AdminProductSerializer(ProductSerializer):
-    """Writable product serializer for admin endpoints."""
+    """Writable product serializer for admin endpoints.
+
+    Adds an `image` file field so the admin form can upload an image from
+    the user's computer. The file is validated by Django's ImageField
+    (which uses Pillow) — non-images and corrupt files are rejected.
+    """
+
+    image = serializers.ImageField(write_only=True, required=False, allow_null=True)
 
     class Meta(ProductSerializer.Meta):
+        fields = ProductSerializer.Meta.fields + ("image",)
         read_only_fields = ("id",)

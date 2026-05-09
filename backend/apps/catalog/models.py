@@ -33,6 +33,11 @@ class Product(models.Model):
     price_cents = models.PositiveIntegerField()
     currency = models.CharField(max_length=3, default="ILS")
     stock = models.PositiveIntegerField(default=0)
+    # `image` is the canonical, admin-uploaded image. `image_url` is kept for
+    # backwards compatibility with seed data that references frontend assets
+    # or external URLs; the serializer prefers `image` and falls back to
+    # `image_url` so existing rows continue to render.
+    image = models.ImageField(upload_to="products/", blank=True, null=True)
     image_url = models.URLField(max_length=500, blank=True)
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

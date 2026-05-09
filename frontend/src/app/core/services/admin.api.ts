@@ -25,6 +25,39 @@ export interface ContactMessage {
   handled: boolean;
 }
 
+/**
+ * Admin product write payload. All fields are optional so the same shape
+ * works for both create (where all required fields must be present) and
+ * partial PATCH updates. `image` is an optional File — when present the
+ * request is sent as multipart so Django ImageField receives it; otherwise
+ * we send JSON.
+ */
+export type ProductWritePayload = Partial<Omit<Product, 'id' | 'category_slug' | 'image_url'>> & {
+  image?: File | null;
+};
+
+/**
+ * Convert a write payload to the right HTTP body. If an `image` File is
+ * attached we have to use FormData (and let the browser set the Content-Type
+ * boundary header) so DRF's MultiPartParser can read it. Otherwise JSON is
+ * fine and lets DRF use its standard JSON parser.
+ */
+function toBody(payload: ProductWritePayload): FormData | Record<string, unknown> {
+  const { image, ...rest } = payload;
+  if (image instanceof File) {
+    const fd = new FormData();
+    fd.append('image', image, image.name);
+    for (const [k, v] of Object.entries(rest)) {
+      if (v === undefined || v === null) continue;
+      // Booleans need to be stringified; FormData converts everything to string anyway.
+      fd.append(k, typeof v === 'boolean' ? (v ? 'true' : 'false') : String(v));
+    }
+    return fd;
+  }
+  // JSON path — keep booleans/numbers as-is.
+  return rest;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AdminApi {
   private http = inject(HttpClient);
@@ -37,11 +70,13 @@ export class AdminApi {
   getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.base}/products/${id}/`);
   }
-  createProduct(payload: Partial<Product>): Observable<Product> {
-    return this.http.post<Product>(`${this.base}/products/`, payload);
+  createProduct(payload: ProductWritePayload): Observable<Product> {
+    const body = toBody(payload);
+    return this.http.post<Product>(`${this.base}/products/`, body);
   }
-  updateProduct(id: number, payload: Partial<Product>): Observable<Product> {
-    return this.http.patch<Product>(`${this.base}/products/${id}/`, payload);
+  updateProduct(id: number, payload: ProductWritePayload): Observable<Product> {
+    const body = toBody(payload);
+    return this.http.patch<Product>(`${this.base}/products/${id}/`, body);
   }
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/products/${id}/`);

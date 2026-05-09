@@ -30,3 +30,5 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[!]` blocked
 | 22 | [Accessibility review (WCAG 2.1 AA)](./22-accessibility-review.md) | [x] | Findings recorded |
 | 23 | [Design critique](./23-design-critique.md)            | [x] | Findings recorded |
 | 24 | [Local dev + deployment](./24-local-dev-and-deploy.md) | [x] | README at repo root covers local setup |
+| 25 | [Design critique (pass 2)](./25-design-critique-followup.md) | [x] | Live-site + static findings, prioritised follow-ups |
+| 26 | [Railway deployment (Chrome-MCP auto-setup)](./26-railway-deployment.md) | [ ] | Plan written; awaiting Dockerfiles + first deploy |

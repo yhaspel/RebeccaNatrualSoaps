@@ -2,7 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { AdminApi, ContactMessage } from '../core/services/admin.api';
+import { AdminApi, ContactMessage, ProductWritePayload } from '../core/services/admin.api';
 import { Product } from '../core/models/product.model';
 import { Order, OrderStatus } from '../core/models/order.model';
 
@@ -40,11 +40,11 @@ export class AdminFacade {
     return this.api.getProduct(id);
   }
 
-  createProduct(payload: Partial<Product>): Observable<Product> {
+  createProduct(payload: ProductWritePayload): Observable<Product> {
     return this.api.createProduct(payload).pipe(tap(() => this.loadProducts()));
   }
 
-  updateProduct(id: number, payload: Partial<Product>): Observable<Product> {
+  updateProduct(id: number, payload: ProductWritePayload): Observable<Product> {
     return this.api.updateProduct(id, payload).pipe(tap(() => this.loadProducts()));
   }
 

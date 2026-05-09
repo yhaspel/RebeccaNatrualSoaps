@@ -1,5 +1,6 @@
 from rest_framework import generics, permissions, viewsets
 from rest_framework.decorators import action
+from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.response import Response
 
 from apps.users.permissions import IsStoreAdmin
@@ -39,6 +40,9 @@ class ProductDetailView(generics.RetrieveAPIView):
 class AdminProductViewSet(viewsets.ModelViewSet):
     serializer_class = AdminProductSerializer
     permission_classes = (IsStoreAdmin,)
+    # Accept JSON for fields-only updates and multipart when an image file
+    # is included. FormParser is added so the admin can submit either way.
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
     queryset = Product.objects.select_related("category").all()
     filterset_fields = ("category__slug", "is_active", "is_featured")
     search_fields = ("name_en", "name_he", "sku")

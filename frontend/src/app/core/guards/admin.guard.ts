@@ -1,12 +1,25 @@
 import { inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { CanActivateFn, Router } from '@angular/router';
+import { filter, map, take } from 'rxjs/operators';
 
 import { AuthFacade } from '../../abstraction/auth.facade';
 
+/**
+ * Wait for `auth.hydrate()` to complete before deciding. Otherwise, on a
+ * hard reload the guard reads `_user === null` while the /me request is
+ * still in flight and bounces the admin to /admin/login even though their
+ * token is valid.
+ */
 export const adminGuard: CanActivateFn = () => {
   const auth = inject(AuthFacade);
   const router = inject(Router);
-  if (auth.isLoggedIn() && auth.isStoreAdmin()) return true;
-  router.navigate(['/admin/login']);
-  return false;
+  return toObservable(auth.hydrated).pipe(
+    filter((h) => h),
+    take(1),
+    map(() => {
+      if (auth.isLoggedIn() && auth.isStoreAdmin()) return true;
+      return router.createUrlTree(['/admin/login']);
+    }),
+  );
 };

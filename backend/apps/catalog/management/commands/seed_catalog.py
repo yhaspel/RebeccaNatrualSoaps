@@ -64,7 +64,7 @@ PRODUCTS = [
         "ingredients_he": "חֵלֶב בקר מעשב, שמן זית, דבש גולמי, נתרן הידרוקסידי",
         "price_cents": 4200,
         "stock": 30,
-        "image_url": "https://images.unsplash.com/photo-1600857062241-98ce0d2e6e4b?w=900",
+        "image_url": "/assets/products/honey-tallow.jpg",
         "is_featured": True,
     },
     {
@@ -80,7 +80,7 @@ PRODUCTS = [
         "ingredients_he": "חלב, שמן זית, שמן קוקוס, שמן אתרי אקליפטוס, נתרן הידרוקסידי",
         "price_cents": 3800,
         "stock": 20,
-        "image_url": "https://images.unsplash.com/photo-1600857062241-98ce0d2e6e4b?w=900&hue=120",
+        "image_url": "/assets/products/eucalyptus-tallow.jpg",
     },
     {
         "category": "tallow",
@@ -95,7 +95,7 @@ PRODUCTS = [
         "ingredients_he": "חלב, שמן זית, מים, נתרן הידרוקסידי",
         "price_cents": 3200,
         "stock": 40,
-        "image_url": "https://images.unsplash.com/photo-1622484211892-fb11a2c30f9d?w=900",
+        "image_url": "/assets/products/unscented-sensitive.jpg",
     },
 
     # --- Olive Oil ---
@@ -190,7 +190,7 @@ PRODUCTS = [
         "ingredients_he": "שמן זית, שמן קוקוס, פחם פעיל, שמן אתרי עץ התה, נתרן",
         "price_cents": 3800,
         "stock": 22,
-        "image_url": "https://images.unsplash.com/photo-1626328253502-46305efd57a8?w=900",
+        "image_url": "/assets/products/charcoal.jpg",
     },
 
     # --- Specials ---
@@ -207,7 +207,7 @@ PRODUCTS = [
         "ingredients_he": "פירוט רכיבים מופיע בעמודי המוצר של הסבונים בנפרד.",
         "price_cents": 9900,
         "stock": 15,
-        "image_url": "https://images.unsplash.com/photo-1629198726930-7c7cab40a5d9?w=900",
+        "image_url": "/assets/products/trio-gift.jpg",
         "is_featured": True,
     },
     {
@@ -223,7 +223,7 @@ PRODUCTS = [
         "ingredients_he": "שמן זית, שמן קוקוס, שמן אתרי תפוז, שמן אתרי ציפורן, קליפות תפוז, נתרן",
         "price_cents": 3900,
         "stock": 18,
-        "image_url": "https://images.unsplash.com/photo-1611089676218-b0a5e8f2a6c9?w=900",
+        "image_url": "/assets/products/orange-clove.jpg",
     },
     {
         "category": "specials",
@@ -238,7 +238,7 @@ PRODUCTS = [
         "ingredients_he": "משתנה לפי סבון — ראו הכרטיס במארז.",
         "price_cents": 5500,
         "stock": 12,
-        "image_url": "https://images.unsplash.com/photo-1617184003098-40ac0580cf32?w=900",
+        "image_url": "/assets/products/sampler.jpg",
     },
 ]
 

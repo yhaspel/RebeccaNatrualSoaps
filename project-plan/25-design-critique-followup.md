@@ -1,6 +1,6 @@
 # 25 — Design Critique (Pass 2)
 
-A second design pass over the live frontend at `localhost:4200`, building on `23-design-critique.md` and `22-accessibility-review.md`. Scope: public shop + admin, EN/HE, refinement stage. The intent is to (a) confirm what's still unfixed from pass 1, (b) surface findings the first pass missed, and (c) capture issues that only appear under the live build.
+A second design pass over the live frontend at `localhost:4333`, building on `23-design-critique.md` and `22-accessibility-review.md`. Scope: public shop + admin, EN/HE, refinement stage. The intent is to (a) confirm what's still unfixed from pass 1, (b) surface findings the first pass missed, and (c) capture issues that only appear under the live build.
 
 ## Status check on pass 1
 

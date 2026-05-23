@@ -121,8 +121,8 @@ GROW_API_KEY = config("GROW_API_KEY", default="")
 GROW_PAGE_CODE = config("GROW_PAGE_CODE", default="")
 GROW_USER_ID = config("GROW_USER_ID", default="")
 GROW_USE_SANDBOX = config("GROW_USE_SANDBOX", default="true", cast=bool)
-GROW_REDIRECT_BASE = config("GROW_REDIRECT_BASE", default="http://localhost:4200")
-GROW_CALLBACK_BASE = config("GROW_CALLBACK_BASE", default="http://localhost:8000")
+GROW_REDIRECT_BASE = config("GROW_REDIRECT_BASE", default="http://localhost:4333")
+GROW_CALLBACK_BASE = config("GROW_CALLBACK_BASE", default="http://localhost:8777")
 
 # Initial store admin (seeded by the seed_catalog command).
 SEED_ADMIN_USERNAME = config("SEED_ADMIN_USERNAME", default="rebecca")
@@ -135,11 +135,11 @@ DEFAULT_CURRENCY = "ILS"
 
 CORS_ALLOWED_ORIGINS = config(
     "CORS_ALLOWED_ORIGINS",
-    default="http://localhost:4200,http://127.0.0.1:4200",
+    default="http://localhost:4333,http://127.0.0.1:4333",
     cast=Csv(),
 )
 CSRF_TRUSTED_ORIGINS = config(
     "CSRF_TRUSTED_ORIGINS",
-    default="http://localhost:4200,http://127.0.0.1:4200",
+    default="http://localhost:4333,http://127.0.0.1:4333",
     cast=Csv(),
 )

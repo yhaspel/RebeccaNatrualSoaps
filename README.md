@@ -18,7 +18,22 @@ project-plan/           Numbered plan steps + PROGRESS.md tracker
 
 ## Local setup
 
-### 1. Backend
+### Quickstart with Docker
+
+From the repo root:
+
+```bash
+docker compose up --build
+```
+
+This starts both services with live reload (source mounted in):
+
+- Frontend: http://localhost:4333
+- Backend:  http://localhost:8777
+
+The backend auto-runs `migrate` and `seed_catalog` on boot. To reset state, stop the stack and delete `backend/db.sqlite3`.
+
+### 1. Backend (without Docker)
 
 ```bash
 cd backend
@@ -29,7 +44,7 @@ pip install -r requirements/dev.txt
 python manage.py makemigrations users catalog orders contact
 python manage.py migrate
 python manage.py seed_catalog       # 4 categories, 12 soaps, admin user
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8777
 ```
 
 The seed creates a store admin:
@@ -46,21 +61,21 @@ GROW_API_KEY=                    # leave empty for mock payments
 GROW_PAGE_CODE=
 GROW_USER_ID=
 GROW_USE_SANDBOX=true
-GROW_REDIRECT_BASE=http://localhost:4200
-GROW_CALLBACK_BASE=http://localhost:8000
+GROW_REDIRECT_BASE=http://localhost:4333
+GROW_CALLBACK_BASE=http://localhost:8777
 ```
 
 With `GROW_API_KEY` empty, checkout uses a local mock provider that skips the payment page redirect. Good enough to exercise the full flow without a Grow account.
 
-### 2. Frontend
+### 2. Frontend (without Docker)
 
 ```bash
 cd frontend
 npm install
-npm start                            # http://localhost:4200
+npm start                            # http://localhost:4333
 ```
 
-API base URL lives in `src/environments/environment.ts` and defaults to `http://localhost:8000/api`.
+API base URL lives in `src/environments/environment.ts` and defaults to `http://localhost:8777/api`.
 
 ## Key flows
 

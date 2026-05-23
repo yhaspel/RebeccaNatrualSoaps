@@ -9,15 +9,15 @@ pip install -r requirements/dev.txt
 export DJANGO_SETTINGS_MODULE=config.settings.dev
 python manage.py migrate
 python manage.py seed_catalog
-python manage.py runserver 8000
+python manage.py runserver 8777
 
 # Another terminal
 cd frontend
 npm install
-npm start     # http://localhost:4200
+npm start     # http://localhost:4333
 ```
 
-Angular `environment.ts` points `apiUrl` at `http://localhost:8000/api`.
+Angular `environment.ts` points `apiUrl` at `http://localhost:8777/api`.
 
 ## Environment variables
 | Var                       | Dev default                  | Prod |
@@ -27,7 +27,7 @@ Angular `environment.ts` points `apiUrl` at `http://localhost:8000/api`.
 | `GROW_API_KEY`            | unset → mock provider        | required for real payments |
 | `GROW_PAGE_CODE`          | unset → frontend uses mock   | required |
 | `ALLOWED_HOSTS`           | `localhost,127.0.0.1`        | `rebeccasnaturalsoaps.com,…` |
-| `CORS_ALLOWED_ORIGINS`    | `http://localhost:4200`      | `https://rebeccasnaturalsoaps.com` |
+| `CORS_ALLOWED_ORIGINS`    | `http://localhost:4333`      | `https://rebeccasnaturalsoaps.com` |
 
 ## Deployment
 Out of scope for the MVP, but the skeleton is ready for Railway: backend
